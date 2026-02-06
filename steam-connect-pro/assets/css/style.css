@@ -1,0 +1,206 @@
+.scp-users-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 16px;
+}
+
+@media (max-width: 1200px) {
+    .scp-users-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 900px) {
+    .scp-users-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 500px) {
+    .scp-users-grid { grid-template-columns: 1fr; }
+}
+
+.scp-user-card {
+    background: linear-gradient(145deg, #0b1220, #020617);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: flex-start; /* اسم و لینک سمت راست */
+    gap: 3px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.45);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+}
+
+.scp-user-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.6);
+}
+
+.scp-avatar {
+    width: 56px!important;
+    height: 56px!important;
+    border-radius: 10px!important;
+    object-fit: cover!important;
+    border: 2px solid rgba(255,255,255,0.15)!important;
+    flex-shrink: 0!important;
+	margin-left: 5px;
+}
+
+.scp-user-info {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-wrap: wrap;
+    color: #e5e7eb;
+    font-family: Tahoma, sans-serif;
+    font-size: 13px;
+    flex: 1;
+}
+
+.scp-name {
+    font-weight: bold;
+    color: #ffffff;
+    white-space: nowrap;
+}
+
+/* Steam Level Badge */
+.scp-level-badge {
+    position: relative;
+    padding: 4px 10px 3px 10px;
+    font-size: 11px;
+    font-weight: 800;
+    border-radius: 999px;
+    line-height: 1.4;
+    white-space: nowrap;
+    background: linear-gradient(135deg, #1b2838, #2a475e);
+    color: #c7d5e0;
+    box-shadow: 0 0 6px rgba(0,0,0,.25);
+}
+
+/* Tooltip text */
+.scp-level-badge::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    background: #1b2838;
+    color: #c7d5e0;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    transition: all 0.25s ease;
+    z-index: 999;
+}
+
+/* Tooltip arrow */
+.scp-level-badge::before {
+    content: "";
+    position: absolute;
+    bottom: calc(100% + 2px);
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    border-width: 6px;
+    border-style: solid;
+    border-color: #1b2838 transparent transparent transparent;
+    opacity: 0;
+    transition: all 0.25s ease;
+}
+
+/* Show on hover / focus */
+.scp-level-badge:hover::after,
+.scp-level-badge:hover::before,
+.scp-level-badge:focus::after,
+.scp-level-badge:focus::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Level tiers */
+.scp-level-basic {
+    background: #2a2f3a;
+    color: #bfc7d5;
+}
+
+.scp-level-bronze {
+    background: linear-gradient(135deg, #6b4f2c, #a97142);
+    color: #ffe1b8;
+    box-shadow: 0 0 6px rgba(169,113,66,0.4);
+}
+
+.scp-level-silver {
+    background: linear-gradient(135deg, #8a93a0, #cfd6e1);
+    color: #1b1f27;
+    box-shadow: 0 0 8px rgba(207,214,225,0.5);
+}
+
+.scp-level-gold {
+    background: linear-gradient(135deg, #d4af37, #ffdd7e);
+    color: #2a1a00;
+    box-shadow: 0 0 12px rgba(255,221,126,0.8);
+}
+
+.scp-level-platinum {
+    background: linear-gradient(135deg, #6f7cff, #b6c4ff);
+    color: #0b1020;
+    box-shadow:
+        0 0 12px rgba(111,124,255,0.9),
+        0 0 24px rgba(111,124,255,0.6);
+    animation: scp-platinum-glow 2.5s infinite alternate;
+}
+
+@keyframes scp-platinum-glow {
+    from { box-shadow: 0 0 12px rgba(111,124,255,0.6); }
+    to   { box-shadow: 0 0 24px rgba(111,124,255,1); }
+}
+
+
+.scp-status {
+    white-space: nowrap;
+}
+
+.scp-online-status {
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 999px;
+    animation: fadePulse 1.6s infinite ease-in-out;
+}
+
+.scp-online-status.online {
+    color: #00ff99;
+    background: rgba(0, 255, 153, 0.15);
+    text-shadow: 0 0 6px rgba(0,255,153,0.6);
+}
+
+.scp-online-status.offline {
+    color: #ff4d6d;
+    background: rgba(255, 77, 109, 0.15);
+    text-shadow: 0 0 6px rgba(255,77,109,0.5);
+}
+
+@keyframes fadePulse {
+    0%   { opacity: 0.55; }
+    50%  { opacity: 1; }
+    100% { opacity: 0.55; }
+}
+
+.scp-profile-link {
+    margin-left: auto;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 4px 10px rgba(0,114,255,0.4);
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.scp-profile-link:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 7px 16px rgba(0,114,255,0.7);
+}
